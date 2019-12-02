@@ -1,0 +1,171 @@
+<div class="container">
+    <form class="form-horizontal" [formGroup]="employeeDetail">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Employee Personal Details</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group"
+                    [ngClass]="{'has-error': ((employeeDetail.get('id').touched || employeeDetail.get('id').dirty) && employeeDetail.get('id').errors)}">
+                    <label class="col-sm-4 control-label" for="id">Employee ID</label>
+                    <div class="col-sm-8">
+                        <input id="id" type="number" class="form-control" formControlName="id" required>
+                    </div>
+                    <span class="help-block alert alert-danger"
+                        *ngIf="((employeeDetail.get('id').touched || employeeDetail.get('id').dirty) && employeeDetail.get('id').errors)">
+                        <span *ngIf="employeeDetail.get('id').errors.required"> Employee Id is required</span><br>
+                        <span *ngIf="employeeDetail.get('id').errors.maxlength">
+                            Employee ID must be between 2 to 3 digits</span>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="name">Name</label>
+                    <div class="col-sm-8">
+                        <input id="name" type="text" class="form-control" formControlName="name">
+                        <span class="help-block alert alert-danger"
+                            *ngIf="((employeeDetail.get('name').touched || employeeDetail.get('name').dirty) && employeeDetail.get('name').errors)">
+                            <span *ngIf="employeeDetail.get('name').errors.required">Name is required</span><br>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="age">Age</label>
+                    <div class="col-sm-8">
+                        <input id="age" type="number" class="form-control" formControlName="age">
+                        <span class="help-block alert alert-danger"
+                            *ngIf="((employeeDetail.get('age').touched || employeeDetail.get('age').dirty) && employeeDetail.get('age').errors)">
+                            <span *ngIf="employeeDetail.get('age').errors.required">Age is required</span><br>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Gender</label>
+                    <div class="col-sm-8">
+                        <label class="radio">
+                            <input id="gender" type="radio" value="male" formControlName="gender">Male
+                        </label>
+                        <label class="radio">
+                            <input id="gender" type="radio" value="female" formControlName="gender">Female
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            Contact Details
+                        </label>
+                        <br>
+                        <div class="col-sm-8 form-group" formArrayName="contacts">
+                            <button class="btn btn-outline-primary" (click)="addNewNumber()">Add New</button>
+                            <br><br>
+                            <br>
+                            <label class="col-sm-4 control-label" for="contactId">Contact Number</label>
+                            <input *ngFor="let contact of contacts.controls;let i = index" type="number" id="contactId"
+                                class="form-control" placeholder="Contact Number" [formControlName]="i">
+                        </div>
+                        <div class="col-sm-8 form-group" formGroupName="contact">
+                            <label class="col-sm-4 control-label" for="email">Email</label>
+                            <input id="email" type="email" placeholder="Email ID" class="form-control"
+                                formControlName="email">
+                        </div>
+                    </div>
+                </div>
+                <div formGroupName="address">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            Present Address
+                        </label>
+                        <div class="col-sm-8 form-group">
+                            <label class="col-sm-4 control-label" for="street">Street Number</label>
+                            <input type="text" id="street" class="form-control" placeholder="Street Number"
+                                formControlName="street">
+                        </div>
+                        <div class="col-sm-8 form-group">
+                            <label class="col-sm-4 control-label" for="email">City</label>
+                            <input id="city" type="text" placeholder="City" class="form-control" formControlName="city">
+                        </div>
+                        <div class="col-sm-8 form-group">
+                            <label class="col-sm-4 control-label" for="state">State</label>
+                            <input id="state" type="text" placeholder="State" class="form-control"
+                                formControlName="state">
+                        </div>
+                        <div class="col-sm-8 form-group">
+                            <label class="col-sm-4 control-label" for="country">Country</label>
+                            <input id="country" type="text" placeholder="Country" class="form-control"
+                                formControlName="country">
+                        </div>
+                    </div>
+                </div>
+
+                <div formGroupName="address2">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">
+                            Permanent Address
+                        </label>
+                        <div class="col-sm-8 form-group">
+                            <label class="col-sm-4 control-label" for="street">Street Number</label>
+                            <input type="text" id="street" class="form-control" placeholder="Street Number"
+                                formControlName="street2">
+                        </div>
+                        <div class="col-sm-8 form-group">
+                            <label class="col-sm-4 control-label" for="email">City</label>
+                            <input id="city" type="text" placeholder="City" class="form-control"
+                                formControlName="city2">
+                        </div>
+                        <div class="col-sm-8 form-group">
+                            <label class="col-sm-4 control-label" for="state">State</label>
+                            <input id="state" type="text" placeholder="State" class="form-control"
+                                formControlName="state2">
+                        </div>
+                        <div class="col-sm-8 form-group">
+                            <label class="col-sm-4 control-label" for="country">Country</label>
+                            <input id="country" type="text" placeholder="Country" class="form-control"
+                                formControlName="country2">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-footer">
+                    <button class="btn btn-primary" type="submit" [disabled]="!employeeDetail.valid"
+                        (click)="onSubmit()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <br><br>
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search By Name" style="width:500px;"
+            [(ngModel)]="searchTerm" />
+            <br/><button class="btn btn-lg btn-success" (click)="search(searchTerm)">Search</button>
+    </div>
+    <br><br>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Contact Number</th>
+                    <th>Contact Email ID</th>
+                    <th>Present Address</th>
+                    <th>Permanent Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let emp of details">
+                    <td>{{ emp.id }}</td>
+                    <td>{{ emp.name }}</td>
+                    <td>{{ emp.age }}</td>
+                    <td>{{ emp.gender }}</td>
+                    <td>{{ emp.contacts }}</td>
+                    <td>{{ emp.contact.email }}</td>
+                    <td>{{ emp.address.street }},{{emp.address.city}},{{emp.address.state}},{{emp.address.country}}</td>
+                    <td>{{ emp.address2.street }},{{emp.address2.city}},{{emp.address2.state}},{{emp.address2.country}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
